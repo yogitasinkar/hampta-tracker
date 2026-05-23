@@ -9,6 +9,7 @@ const TESTS = [
     why: 'Best predictor of summit day — measures your sustained uphill capacity.',
     placeholder: 'e.g. 90',
     hint: 'Find a staircase with multiple floors. Climb at a pace that is hard but continuous — not sprinting, not strolling. Start the timer when you begin, stop it the moment you must rest. Enter total seconds.',
+    target: 'Trek-ready: 2 min (120 s) or more',
   },
   {
     key: 'walk_minutes',
@@ -16,6 +17,7 @@ const TESTS = [
     why: 'Measures your aerobic base.',
     placeholder: 'e.g. 16',
     hint: 'Walk 1.6 km (roughly 1 mile, or 4 laps of a standard track) as fast as you comfortably can — brisk pace, not jogging. Record total minutes. Decimals fine, e.g. 15.5.',
+    target: 'Trek-ready: under 14 min feeling comfortable (exertion ≤ 6)',
   },
   {
     key: 'walk_exertion',
@@ -23,6 +25,7 @@ const TESTS = [
     why: 'Calibrates your walk time to actual effort so the plan is not thrown off by a flat vs. hilly route.',
     placeholder: '1 = easy, 10 = gasping',
     hint: 'Rate yourself immediately after finishing. 1 = could hold a full conversation, 10 = gasping and cannot speak. Be honest — this adjusts your result.',
+    target: 'Trek-ready: 6 or below',
   },
   {
     key: 'squat_reps',
@@ -30,6 +33,7 @@ const TESTS = [
     why: 'Measures quad endurance for descents — the Shea Goru descent destroys undertrained legs.',
     placeholder: 'e.g. 20',
     hint: 'Feet shoulder-width, full depth (thighs parallel to floor), back straight. Count until your form breaks — knees caving in, back rounding — not just when it burns.',
+    target: 'Trek-ready: 30 reps or more',
   },
   {
     key: 'wallsit_seconds',
@@ -37,6 +41,7 @@ const TESTS = [
     why: 'Measures static leg strength and knee resilience for long loaded descents.',
     placeholder: 'e.g. 45',
     hint: 'Slide down a flat wall until thighs are parallel to the floor (90° at the knee). Hold as long as you can. Stop when your thighs rise above parallel.',
+    target: 'Trek-ready: 75 s or more',
   },
 ]
 
@@ -85,6 +90,11 @@ export default function Assessment({ onSubmit }) {
           />
           <div className="why">Why: {t.why}</div>
           <div className="muted-note" style={{ marginTop: 4 }}>{t.hint}</div>
+          {t.target && (
+            <div className="muted-note" style={{ marginTop: 4, color: '#1f6b4a', fontWeight: 600 }}>
+              🎯 {t.target}
+            </div>
+          )}
         </div>
       ))}
 
