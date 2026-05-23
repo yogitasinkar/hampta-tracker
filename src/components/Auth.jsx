@@ -6,63 +6,12 @@ import { supabase } from '../lib/supabase'
 const FAKE_DOMAIN = '@hampta.tracker'
 const toEmail = (u) => u.toLowerCase().trim() + FAKE_DOMAIN
 
-export default function Auth({ needsProfile, session, onDone }) {
+export default function Auth() {
   const [mode, setMode] = useState('signin')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [err, setErr] = useState('')
   const [busy, setBusy] = useState(false)
-
-  // Fallback: signed in but profile insert raced during signup — let them pick a name.
-  if (needsProfile) {
-    return (
-      <div className="wrap">
-        <header className="masthead">
-          <div className="kicker">One last step</div>
-          <h1>Pick a username</h1>
-        </header>
-        <div className="card">
-          <label>Username</label>
-          <input
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="e.g. yogi"
-            autoCapitalize="none"
-            autoCorrect="off"
-          />
-          {err && <div className="error">{err}</div>}
-          <div className="spacer" />
-          <button
-            className="btn-primary"
-            disabled={busy || !username.trim()}
-            onClick={async () => {
-              setBusy(true)
-              setErr('')
-              const { error } = await supabase
-                .from('profiles')
-                .insert({ id: session.user.id, display_name: username.trim() })
-              setBusy(false)
-              if (error) setErr(error.message)
-              else onDone()
-            }}
-          >
-            Continue
-          </button>
-          <div className="spacer" />
-          <p className="muted-note center">
-            Something wrong?{' '}
-            <button
-              className="btn-ghost"
-              style={{ padding: '4px 10px', fontSize: 13 }}
-              onClick={() => supabase.auth.signOut()}
-            >
-              Sign out
-            </button>
-          </p>
-        </div>
-      </div>
-    )
-  }
 
   async function submit() {
     const u = username.trim()

@@ -58,8 +58,13 @@ export default function App() {
   const me = session.user.id
   const myProfile = profiles.find((p) => p.id === me)
 
-  // If signed in but no profile row yet, force profile creation.
-  if (!myProfile) return <Auth needsProfile session={session} onDone={loadAll} />
+  // If signed in but no profile row yet, auto-create it from the username
+  // embedded in the synthetic email (e.g. yogi@hampta.tracker → "yogi").
+  if (!myProfile) {
+    const username = (session.user.email || '').split('@')[0] || 'Trekker'
+    supabase.from('profiles').insert({ id: me, display_name: username }).then(loadAll)
+    return <div className="wrap center" style={{ paddingTop: 80 }}>Setting up…</div>
+  }
 
   const viewing = activeUser || me
   const viewData = data[viewing] || { baseline: null, plan: null, dayLogs: [], checkins: [] }
