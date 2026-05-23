@@ -3,7 +3,7 @@
 -- Paste this whole file into the Supabase SQL Editor and click "Run".
 -- ===========================================================================
 
--- Profiles: one row per trekker (you and your husband).
+-- Profiles: one row per user.
 create table if not exists profiles (
   id          uuid primary key references auth.users(id) on delete cascade,
   display_name text not null,
@@ -62,9 +62,8 @@ create table if not exists checkins (
 );
 
 -- ---------------------------------------------------------------------------
--- Row Level Security: everyone signed into THIS project can read both tracks
--- (so you and your husband see each other), but each person writes only their
--- own rows.
+-- Row Level Security: any signed-in user can read all tracks (shared view),
+-- but each person can only write their own rows.
 -- ---------------------------------------------------------------------------
 alter table profiles  enable row level security;
 alter table baselines enable row level security;
@@ -72,7 +71,7 @@ alter table plans     enable row level security;
 alter table day_logs  enable row level security;
 alter table checkins  enable row level security;
 
--- Read: any authenticated user can read all rows (shared two-person view).
+-- Read: any authenticated user can read all rows (shared group view).
 create policy "read all profiles"  on profiles  for select to authenticated using (true);
 create policy "read all baselines" on baselines for select to authenticated using (true);
 create policy "read all plans"     on plans     for select to authenticated using (true);

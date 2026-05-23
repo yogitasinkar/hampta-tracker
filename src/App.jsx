@@ -11,7 +11,6 @@ export default function App() {
   const [session, setSession] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  // shared data for both trekkers
   const [profiles, setProfiles] = useState([])
   const [activeUser, setActiveUser] = useState(null) // which person's track is shown
   const [data, setData] = useState({}) // keyed by user_id: {baseline, plan, dayLogs, checkins}
