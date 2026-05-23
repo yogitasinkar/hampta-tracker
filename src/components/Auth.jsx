@@ -48,6 +48,17 @@ export default function Auth({ needsProfile, session, onDone }) {
           >
             Continue
           </button>
+          <div className="spacer" />
+          <p className="muted-note center">
+            Something wrong?{' '}
+            <button
+              className="btn-ghost"
+              style={{ padding: '4px 10px', fontSize: 13 }}
+              onClick={() => supabase.auth.signOut()}
+            >
+              Sign out
+            </button>
+          </p>
         </div>
       </div>
     )
