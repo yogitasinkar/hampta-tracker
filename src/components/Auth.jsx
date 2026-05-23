@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 
 // Supabase Auth requires an email — we synthesise one from the username.
@@ -12,6 +12,12 @@ export default function Auth() {
   const [password, setPassword] = useState('')
   const [err, setErr] = useState('')
   const [busy, setBusy] = useState(false)
+  const [existingUsers, setExistingUsers] = useState([])
+
+  useEffect(() => {
+    supabase.from('profiles').select('display_name').order('display_name')
+      .then(({ data }) => setExistingUsers((data || []).map((p) => p.display_name)))
+  }, [])
 
   async function submit() {
     const u = username.trim()
@@ -54,14 +60,26 @@ export default function Auth() {
       <div className="card">
         <h2>{mode === 'signin' ? 'Sign in' : 'Create an account'}</h2>
         <label>Username</label>
-        <input
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          type="text"
-          autoCapitalize="none"
-          autoCorrect="off"
-          spellCheck={false}
-        />
+        {mode === 'signin' ? (
+          <select
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          >
+            <option value="">— select —</option>
+            {existingUsers.map((u) => (
+              <option key={u} value={u}>{u}</option>
+            ))}
+          </select>
+        ) : (
+          <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            type="text"
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck={false}
+          />
+        )}
         <label>Password</label>
         <input
           value={password}
