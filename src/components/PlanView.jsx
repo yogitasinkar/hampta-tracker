@@ -171,10 +171,10 @@ export default function PlanView({
                   </button>
                   <button
                     className="btn-saffron"
-                    disabled={busyWeek === wi}
-                    onClick={() => recalibrate(wi)}
+                    disabled
+                    title="Coming soon"
                   >
-                    {busyWeek === wi ? 'Recalibrating…' : 'Recalibrate this week (AI)'}
+                    Recalibrate (AI) — coming soon
                   </button>
                 </div>
                 {checkinWeek === wNum && (
