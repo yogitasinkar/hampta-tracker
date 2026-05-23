@@ -6,37 +6,37 @@ const TESTS = [
   {
     key: 'stair_seconds',
     label: 'Stair climb — continuous, in seconds',
-    why: 'Proxy for sustained uphill capacity, the single best predictor of summit day.',
+    why: 'Best predictor of summit day — measures your sustained uphill capacity.',
     placeholder: 'e.g. 90',
-    hint: 'Climb stairs at a steady hard-but-doable pace. Stop the clock when you must stop. Enter total seconds.',
+    hint: 'Find a staircase with multiple floors. Climb at a pace that is hard but continuous — not sprinting, not strolling. Start the timer when you begin, stop it the moment you must rest. Enter total seconds.',
   },
   {
     key: 'walk_minutes',
     label: 'Brisk 1.6 km walk — time in minutes',
-    why: 'Proxy for aerobic base.',
+    why: 'Measures your aerobic base.',
     placeholder: 'e.g. 16',
-    hint: 'Walk 1.6 km (about 1 mile) as briskly as you comfortably can. Record minutes (decimals fine, e.g. 15.5).',
+    hint: 'Walk 1.6 km (roughly 1 mile, or 4 laps of a standard track) as fast as you comfortably can — brisk pace, not jogging. Record total minutes. Decimals fine, e.g. 15.5.',
   },
   {
     key: 'walk_exertion',
     label: 'How winded after the walk — 1 to 10',
-    why: 'Calibrates the walk result to real effort.',
+    why: 'Calibrates your walk time to actual effort so the plan is not thrown off by a flat vs. hilly route.',
     placeholder: '1 = easy, 10 = gasping',
-    hint: 'Be honest — 1 means you could chat easily, 10 means you were gasping.',
+    hint: 'Rate yourself immediately after finishing. 1 = could hold a full conversation, 10 = gasping and cannot speak. Be honest — this adjusts your result.',
   },
   {
     key: 'squat_reps',
     label: 'Bodyweight squats to form failure — reps',
-    why: 'Proxy for descent-day quad endurance — the Shea Goru descent destroys undertrained legs.',
+    why: 'Measures quad endurance for descents — the Shea Goru descent destroys undertrained legs.',
     placeholder: 'e.g. 20',
-    hint: 'Full, controlled squats. Stop when form breaks, not when it merely burns.',
+    hint: 'Feet shoulder-width, full depth (thighs parallel to floor), back straight. Count until your form breaks — knees caving in, back rounding — not just when it burns.',
   },
   {
     key: 'wallsit_seconds',
     label: 'Wall sit — hold time in seconds',
-    why: 'Proxy for static leg strength and knee resilience.',
+    why: 'Measures static leg strength and knee resilience for long loaded descents.',
     placeholder: 'e.g. 45',
-    hint: 'Back flat against a wall, thighs parallel to floor. Hold as long as you can.',
+    hint: 'Slide down a flat wall until thighs are parallel to the floor (90° at the knee). Hold as long as you can. Stop when your thighs rise above parallel.',
   },
 ]
 
@@ -67,9 +67,10 @@ export default function Assessment({ onSubmit }) {
     <div className="card">
       <h2>Baseline fitness assessment</h2>
       <p className="sub">
-        Before the plan can be personalised, we measure where you actually are.
-        Do these over a day or two when fresh, warm up first, and don’t push into
-        pain. Your results decide your starting volume and intensity.
+        Five quick tests measure where you actually are — your results set the
+        starting volume and intensity of your plan. Do them when fresh (not after
+        a workout), warm up for 5 minutes first, and spread them across a day or
+        two if needed. Stop any test if you feel pain.
       </p>
 
       {TESTS.map((t) => (
