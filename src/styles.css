@@ -1,0 +1,139 @@
+/* Hampta Pass Trainer — warm alpine / topographic-map aesthetic.
+   Forest green, stone, a single saffron accent. Editorial, calm, not techy. */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Outfit:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #f4f1ea;
+  --paper: #fbf9f4;
+  --ink: #23271f;
+  --muted: #6e7163;
+  --forest: #1f6b4a;
+  --forest-dark: #164d36;
+  --saffron: #d98324;
+  --stone: #d9d3c4;
+  --line: #e3ddd0;
+  --shadow: 0 1px 2px rgba(35,39,31,.06), 0 8px 24px rgba(35,39,31,.06);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Outfit', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(31,107,74,.04) 0, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(217,131,36,.05) 0, transparent 45%);
+  background-attachment: fixed;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 20px 16px 80px; }
+
+h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; line-height: 1.15; }
+
+.masthead { text-align: center; padding: 18px 0 8px; }
+.masthead .kicker {
+  font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--saffron); font-weight: 600;
+}
+.masthead h1 { font-size: 30px; margin: 4px 0; color: var(--forest-dark); }
+.masthead .dates { color: var(--muted); font-size: 14px; }
+
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  margin: 14px 0;
+  box-shadow: var(--shadow);
+}
+.card h2 { font-size: 19px; margin-bottom: 4px; }
+.card h3 { font-size: 15px; }
+.card .sub { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
+
+label { display: block; font-size: 13px; font-weight: 500; margin: 12px 0 4px; }
+input, select {
+  width: 100%; padding: 10px 12px; font-size: 15px; font-family: inherit;
+  border: 1px solid var(--stone); border-radius: 9px; background: #fff; color: var(--ink);
+}
+input:focus, select:focus { outline: 2px solid var(--forest); border-color: var(--forest); }
+
+button {
+  font-family: inherit; font-weight: 500; font-size: 15px; cursor: pointer;
+  border: none; border-radius: 9px; padding: 11px 18px; transition: transform .06s, opacity .15s;
+}
+button:active { transform: translateY(1px); }
+.btn-primary { background: var(--forest); color: #fff; }
+.btn-primary:hover { background: var(--forest-dark); }
+.btn-ghost { background: transparent; color: var(--forest); border: 1px solid var(--stone); }
+.btn-saffron { background: var(--saffron); color: #fff; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+
+.row { display: flex; gap: 10px; flex-wrap: wrap; }
+.row > * { flex: 1; min-width: 120px; }
+
+/* Tabs for switching person */
+.tabs { display: flex; gap: 6px; margin: 14px 0; }
+.tab {
+  flex: 1; text-align: center; padding: 10px; border-radius: 10px;
+  background: var(--paper); border: 1px solid var(--line); color: var(--muted);
+  font-weight: 500; cursor: pointer; font-size: 14px;
+}
+.tab.active { background: var(--forest); color: #fff; border-color: var(--forest); }
+
+/* Readiness banner */
+.readiness { border-radius: 12px; padding: 14px 16px; margin: 12px 0; font-size: 14px; }
+.readiness .lvl { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; }
+.readiness.on-track { background: #e7f3ec; border: 1px solid #bcdcca; color: var(--forest-dark); }
+.readiness.building { background: #fdf3e3; border: 1px solid #ecd9b4; color: #8a5a14; }
+.readiness.behind, .readiness.caution { background: #fbe9e4; border: 1px solid #eccabc; color: #9a3d24; }
+.readiness.unknown { background: #eef0ea; border: 1px solid var(--line); color: var(--muted); }
+
+/* Progress bar */
+.bar { height: 10px; background: var(--stone); border-radius: 6px; overflow: hidden; margin: 8px 0; }
+.bar > div { height: 100%; background: var(--forest); border-radius: 6px; transition: width .4s; }
+
+/* Week + day list */
+.week-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 18px; padding-bottom: 6px; border-bottom: 2px solid var(--line);
+}
+.week-head h3 { font-size: 17px; color: var(--forest-dark); }
+.week-tag { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--saffron); font-weight: 600; }
+
+.day {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 12px; border: 1px solid var(--line); border-radius: 11px;
+  background: var(--paper); margin: 8px 0;
+}
+.day.done { background: #f0f6f1; border-color: #c9e2d1; }
+.day.rest { background: #f1f0ec; }
+.day .check {
+  width: 26px; height: 26px; border-radius: 7px; border: 2px solid var(--stone);
+  flex-shrink: 0; cursor: pointer; display: grid; place-items: center;
+  background: #fff; font-size: 15px; color: #fff;
+}
+.day.done .check { background: var(--forest); border-color: var(--forest); }
+.day .body { flex: 1; }
+.day .focus { font-weight: 600; font-size: 14px; }
+.day .detail { font-size: 13px; color: var(--muted); margin-top: 2px; line-height: 1.45; }
+.pill {
+  display: inline-block; font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 20px; font-weight: 600; margin-top: 6px;
+}
+.pill.endurance { background: #e3eef9; color: #2a5c87; }
+.pill.strength { background: #f5e6e0; color: #9a4d2e; }
+.pill.incline { background: #ece8d5; color: #7a6a1e; }
+.pill.load { background: #e6e2f0; color: #54467e; }
+.pill.rest { background: var(--stone); color: var(--muted); }
+
+.muted-note { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.center { text-align: center; }
+.spacer { height: 8px; }
+.error { color: #9a3d24; font-size: 13px; margin-top: 8px; }
+.ok { color: var(--forest); font-size: 13px; margin-top: 8px; }
+
+.assess-test { border-left: 3px solid var(--saffron); padding-left: 12px; margin: 14px 0; }
+.assess-test .why { font-size: 12px; color: var(--muted); font-style: italic; }
